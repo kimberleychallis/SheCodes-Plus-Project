@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App Project</title>
+
+    <!-- Bootstrap Import -->
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS Import -->
+
+    <link rel="stylesheet" href="src/styles.css" />
+
+    <!-- Google Font Import -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    /> -->
+
+    <!-- FontAwesome Icon Import -->
+
+    <script
+      src="https://kit.fontawesome.com/0931114c43.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="app shadow-lg">
+        <!-- City Search Function-->
+
+        <form>
+          <div class="input-group" id="search-city">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Where are you?"
+              aria-label="User's city"
+              aria-describedby="button-addon2"
+              id="city-search-input"
+              required
+            />
+            <div class="input-group-append">
+              <button class="btn" type="submit" id="button-addon2">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Current Weather-->
+
+        <div class="current border shadow-lg">
+          <div class="row now">
+            <div class="col-8">
+              <div><h1 id="city">London</h1></div>
+              <div class="date-time">
+                <h2 id="date-time">Friday, 15 January 2021 14:10</h2>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="current-weather-icon">
+                <i class="fas fa-cloud-sun"></i>
+              </div>
+            </div>
+          </div>
+          <div class="row temps">
+            <div class="col">
+              <div class="current-temperature">13°</div>
+              <div class="min-max-temperature">
+                <i class="fas fa-angle-up"></i> 14
+                <i class="fas fa-angle-down"></i> 8
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Weather-->
+
+        <div class="future">
+          <!-- Day One -->
+
+          <div class="day-one row">
+            <div class="col-7">
+              <h3>Saturday</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-cloud-rain"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">14</span></div>
+            <div class="col-2 min-max"><span class="min">13</span></div>
+          </div>
+
+          <!-- Day Two -->
+
+          <div class="day-two row">
+            <div class="col-7">
+              <h3>Sunday</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-sun"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">12</span></div>
+            <div class="col-2 min-max"><span class="min">2</span></div>
+          </div>
+
+          <!-- Day Three -->
+
+          <div class="day-three row">
+            <div class="col-7">
+              <h3>Monday</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-cloud-sun-rain"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">15</span></div>
+            <div class="col-2 min-max"><span class="min">14</span></div>
+          </div>
+
+          <!-- Day Four -->
+
+          <div class="day-four row">
+            <div class="col-7">
+              <h3>Tuesday</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-cloud-showers-heavy"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">10</span></div>
+            <div class="col-2 min-max"><span class="min">3</span></div>
+          </div>
+
+          <!-- Day Five -->
+
+          <div class="day-five row">
+            <div class="col-7">
+              <h3>Wednesday</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-sun"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">11</span></div>
+            <div class="col-2 min-max"><span class="min">9</span></div>
+          </div>
+
+          <!-- Switch from celsius to fahrenheit -->
+
+          <div class="row">
+            <div class="col">
+              <h3 id="switch">
+                <i class="fas fa-sync-alt"></i> switch to fahrenheit
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
