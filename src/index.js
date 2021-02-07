@@ -36,8 +36,9 @@ const year = now.getFullYear();
 const hour = now.getHours();
 const minutes = now.getMinutes();
 
-const dateTime = document.querySelector("#date-time");
-dateTime.innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
+document.querySelector(
+  "#date-time"
+).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
 
 // 🌞 OPEN WEATHER API
 
@@ -48,11 +49,13 @@ const apiURL = "https://api.openweathermap.org/data/2.5/weather?";
 
 //// 🏙 API call using user input
 
-function searchCity(event) {
+function handleSubmit(event) {
   event.preventDefault();
+  const city = document.querySelector("#city-search-input").value;
+  searchCity(city);
+}
 
-  const cityInput = document.querySelector("#city-search-input");
-  const city = cityInput.value;
+function searchCity(city) {
   const apiSearchString = `${apiURL}q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiSearchString).then(displayWeather);
@@ -81,18 +84,23 @@ geolocateButton.addEventListener("click", geolocateUser);
 //// 🏙 Display city name and current temperature (input or geolocation)
 
 function displayWeather(response) {
+  // set app back to celsius or else conversion calculations go a bit mental
+
+  document.querySelector(
+    "#switch"
+  ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to farenheit`;
+
+  // display data from API
+
   const temperature = Math.round(response.data.main.temp);
   const cityName = response.data.name;
 
-  const cityNameDisplay = document.querySelector("#city");
-  cityNameDisplay.innerHTML = `${cityName}`;
-
-  const nowTemperature = document.querySelector("#current-temperature");
-  nowTemperature.innerHTML = `${temperature}°`;
+  document.querySelector("#city").innerHTML = `${cityName}`;
+  document.querySelector("#current-temperature").innerHTML = `${temperature}°`;
 }
 
 const search = document.querySelector("form");
-search.addEventListener("submit", searchCity);
+search.addEventListener("submit", handleSubmit);
 
 // 🌡 SWITCH BETWEEN CELSIUS AND FAHRENHEIT
 // Will probably need to split these out into functions that do the conversion
@@ -109,11 +117,12 @@ function convertTemp() {
     // switches temperatures to celsius
 
     const tempFahrenheitString = document.querySelector("#current-temperature");
-    const tempFahrenheit = parseInt(tempFahrenheitString.innerText);
-    const tempCelsius = Math.round(((tempFahrenheit - 32) * 5) / 9);
+    const tempFahrenheit = parseInt(tempFahrenheitString.innerHTML);
+    const tempCelsius = Math.round(convertToCelsius(tempFahrenheit));
 
-    const currentTemperature = document.querySelector("#current-temperature");
-    currentTemperature.innerHTML = `${tempCelsius}`;
+    document.querySelector(
+      "#current-temperature"
+    ).innerHTML = `${tempCelsius}°`;
   } else {
     // toggles 'button'
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to celsius`;
@@ -121,13 +130,26 @@ function convertTemp() {
     // switches temperatures to fahrenheit
 
     const tempCelsiusString = document.querySelector("#current-temperature");
-    const tempCelsius = parseInt(tempCelsiusString.innerText);
-    const tempFahrenheit = Math.round((tempCelsius * 9) / 5 + 32);
+    const tempCelsius = parseInt(tempCelsiusString.innerHTML);
+    const tempFahrenheit = Math.round(convertToFahrenheit(tempCelsius));
 
-    const currentTemperature = document.querySelector("#current-temperature");
-    currentTemperature.innerHTML = `${tempFahrenheit}`;
+    document.querySelector(
+      "#current-temperature"
+    ).innerHTML = `${tempFahrenheit}°`;
   }
+}
+
+function convertToCelsius(fahrenheit) {
+  return ((fahrenheit - 32) * 5) / 9;
+}
+
+function convertToFahrenheit(celsius) {
+  return (celsius * 9) / 5 + 32;
 }
 
 const switchButton = document.querySelector("#switch");
 switchButton.addEventListener("click", convertTemp);
+
+// 🇬🇧 SET DEFAULT CITY TO LONDON, BEST CITY ON EARTH
+
+searchCity("London");
