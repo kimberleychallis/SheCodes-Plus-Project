@@ -88,7 +88,7 @@ function displayWeather(response) {
 
   document.querySelector(
     "#switch"
-  ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to farenheit`;
+  ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
 
   // display data from API
 
@@ -112,7 +112,7 @@ function convertTemp() {
   const celsius = buttonContent.includes("celsius");
   if (celsius === true) {
     // toggles 'button'
-    switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to farenheit`;
+    switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
 
     // switches temperatures to celsius
 
