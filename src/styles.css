@@ -8,7 +8,7 @@ body {
   min-width: 470px;
   padding: 3rem 2.25rem 1.75rem 2.25rem;
   border-radius: 1.25rem;
-  background-image: linear-gradient(to top, #6f86d6 0%, #48c6ef 100%);
+  background-image: linear-gradient(to right top, #6f86d6 0%, #48c6ef 100%);
   /* font-family: "Montserrat", sans-serif; */
   font-family: "Nunito", sans-serif;
   border: 4px solid whitesmoke;
@@ -126,7 +126,8 @@ input.form-control:focus {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.future h3 {
+.future h3,
+h4 {
   font-size: 1rem;
   margin-top: 0.5rem;
   letter-spacing: 0.05rem;

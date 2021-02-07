@@ -1,8 +1,13 @@
+// ⛅️ Open Weather Map API Details
+
+const apiKey = "3e11ec91583e0c90e17fc5eef84e88aa";
+const apiURL = "https://api.openweathermap.org/data/2.5/weather?";
+
 // 📆 Display date and time
 
-let now = new Date();
+const now = new Date();
 
-let days = [
+const days = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -11,11 +16,11 @@ let days = [
   "Friday",
   "Saturday",
 ];
-let day = days[now.getDay()];
+const day = days[now.getDay()];
 
-let date = now.getDate();
+const date = now.getDate();
 
-let months = [
+const months = [
   "January",
   "February",
   "March",
@@ -29,14 +34,14 @@ let months = [
   "November",
   "December",
 ];
-let month = months[now.getMonth()];
+const month = months[now.getMonth()];
 
-let year = now.getFullYear();
+const year = now.getFullYear();
 
-let hour = now.getHours();
-let minutes = now.getMinutes();
+const hour = now.getHours();
+const minutes = now.getMinutes();
 
-let dateTime = document.querySelector("#date-time");
+const dateTime = document.querySelector("#date-time");
 dateTime.innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
 
 // 🏙 Display city name
@@ -44,35 +49,29 @@ dateTime.innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
 function searchCity(event) {
   event.preventDefault();
 
-  let city = document.querySelector("#city-search-input");
-  city = city.value;
+  const cityInput = document.querySelector("#city-search-input");
+  const city = cityInput.value;
 
-  let cityDisplay = document.querySelector("#city");
+  const cityDisplay = document.querySelector("#city");
   cityDisplay.innerHTML = `${city}`;
 }
 
-let search = document.querySelector("form");
+const search = document.querySelector("form");
 search.addEventListener("submit", searchCity);
 
-// 🙀Bonus Feature
-// Display a fake temperature (i.e 17) in Celsius and add a link to convert it to Fahrenheit. When clicking on it, it should convert the temperature to Fahrenheit. When clicking on Celsius, it should convert it back to Celsius.
+// 🌡 Switch between celsius and fahrenheit
 
-// Switch between celsius and fahrenheit
-// Going to do this when I decide how I would like the layout to accommodate it
+function convertTemp() {
+  const switchButton = document.querySelector("#switch");
+  const buttonContent = switchButton.innerHTML;
 
-function switchDegrees() {
-  let switchButton = document.querySelector("#switch");
-  let buttonContent = switchButton.innerHTML;
-
-  let celsius = buttonContent.includes("celsius");
+  const celsius = buttonContent.includes("celsius");
   if (celsius === true) {
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to farenheit`;
   } else {
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to celsius`;
   }
-
-  // change aaaallllllll the degrees
 }
 
-let switchButton = document.querySelector("#switch");
-switchButton.addEventListener("click", switchDegrees);
+const switchButton = document.querySelector("#switch");
+switchButton.addEventListener("click", convertTemp);
