@@ -54,6 +54,14 @@ input.form-control:focus {
   color: rgba(0, 0, 0, 0.75);
 }
 
+#search-city {
+  left: 1px;
+}
+
+#geolocate {
+  left: 2px;
+}
+
 /* Current Weather */
 
 .current {
@@ -90,7 +98,7 @@ input.form-control:focus {
   color: #6f86d6;
 }
 
-.current .current-temperature {
+#current-temperature {
   font-size: 3rem;
   text-align: right;
   line-height: 1;
@@ -98,7 +106,7 @@ input.form-control:focus {
   color: #3d4a77;
 }
 
-.current .min-max-temperature {
+#current-min-max-temperature {
   text-align: right;
   color: darkgray;
   font-size: 1rem;

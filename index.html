@@ -53,15 +53,19 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Where are you?"
+              placeholder="Enter a city"
               aria-label="User's city"
               aria-describedby="button-addon2"
               id="city-search-input"
               required
             />
             <div class="input-group-append">
-              <button class="btn" type="submit" id="button-addon2">
+              
+              <button class="btn" type="submit" id="search-city">
                 <i class="fas fa-search"></i>
+              </button>
+              <button class="btn" type="button" id="geolocate">
+                <i class="fas fa-map-marker-alt"></i>
               </button>
             </div>
           </div>
@@ -85,8 +89,8 @@
           </div>
           <div class="row temps">
             <div class="col">
-              <div class="current-temperature">13°</div>
-              <div class="min-max-temperature">
+              <div id="current-temperature">13°</div>
+              <div id="current-min-max-temperature">
                 <i class="fas fa-angle-up"></i> 14
                 <i class="fas fa-angle-down"></i> 8
               </div>
