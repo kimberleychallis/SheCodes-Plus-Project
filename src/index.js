@@ -1,4 +1,4 @@
-// 📆 DISPLAY USER'S CURRENT DATE AND TIME
+// DISPLAY USER'S CURRENT DATE AND TIME
 
 const now = new Date();
 
@@ -40,14 +40,14 @@ document.querySelector(
   "#date-time"
 ).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
 
-// 🌞 OPEN WEATHER API
+// OPEN WEATHER API
 
-//// ⛅️ Open Weather Map API Details
+//// Open Weather Map API Details
 
 const apiKey = "3e11ec91583e0c90e17fc5eef84e88aa";
 const apiURL = "https://api.openweathermap.org/data/2.5/weather?";
 
-//// 🏙 API call using user input
+//// API call using user input
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -56,12 +56,13 @@ function handleSubmit(event) {
 }
 
 function searchCity(city) {
+  if (city == null) return;
   const apiSearchString = `${apiURL}q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiSearchString).then(displayWeather);
 }
 
-//// 🗺 Obtain current location and API call using geolocation
+//// Obtain current location and API call using geolocation
 
 function geolocateUser(event) {
   event.preventDefault();
@@ -81,7 +82,7 @@ function obtainWeather(position) {
 const geolocateButton = document.querySelector("#geolocate");
 geolocateButton.addEventListener("click", geolocateUser);
 
-//// 🏙 Display city name and current temperature (input or geolocation)
+//// Display city name and current temperature (input or geolocation)
 
 function displayWeather(response) {
   // set app back to celsius or else conversion calculations go a bit mental
@@ -102,7 +103,7 @@ function displayWeather(response) {
 const search = document.querySelector("form");
 search.addEventListener("submit", handleSubmit);
 
-// 🌡 SWITCH BETWEEN CELSIUS AND FAHRENHEIT
+// SWITCH BETWEEN CELSIUS AND FAHRENHEIT
 // Will probably need to split these out into functions that do the conversion
 
 function convertTemp() {
@@ -140,16 +141,18 @@ function convertTemp() {
 }
 
 function convertToCelsius(fahrenheit) {
+  if (fahrenheit == null) return;
   return ((fahrenheit - 32) * 5) / 9;
 }
 
 function convertToFahrenheit(celsius) {
+  if (celsius == null) return;
   return (celsius * 9) / 5 + 32;
 }
 
 const switchButton = document.querySelector("#switch");
 switchButton.addEventListener("click", convertTemp);
 
-// 🇬🇧 SET DEFAULT CITY TO LONDON, BEST CITY ON EARTH
+// SET DEFAULT CITY TO LONDON, BEST CITY ON EARTH
 
 searchCity("London");
