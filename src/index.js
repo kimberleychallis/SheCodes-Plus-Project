@@ -205,6 +205,14 @@ function displayWeather(response) {
     }
   }
 
+  // setCurrentWeatherIconAndColours(200);
+  // setCurrentWeatherIconAndColours(300);
+  // setCurrentWeatherIconAndColours(500);
+  // setCurrentWeatherIconAndColours(600);
+  // setCurrentWeatherIconAndColours(700);
+  // setCurrentWeatherIconAndColours(771);
+  // setCurrentWeatherIconAndColours(800);
+  // setCurrentWeatherIconAndColours(801);
   // setCurrentWeatherIconAndColours(804);
   setCurrentWeatherIconAndColours(response.data.weather[0].id);
 

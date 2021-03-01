@@ -68,6 +68,7 @@ input.form-control:focus {
   margin: 2rem 0 1rem 0;
   border-radius: 1.25rem;
   background-color: white;
+  overflow: hidden;
 }
 
 .current .now {
@@ -93,8 +94,12 @@ input.form-control:focus {
 }
 
 #current-weather-icon {
-  font-size: 4rem;
-  color: #6f86d6;
+  color: white;
+  font-size: 240px;
+  position: absolute;
+  opacity: 30%;
+  top: -90px;
+  left: -150px;
 }
 
 #current-temperature {
