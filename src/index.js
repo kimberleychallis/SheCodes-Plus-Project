@@ -1,8 +1,4 @@
-// DISPLAY USER'S CURRENT DATE AND TIME
-
-// const now = new Date();
-
-// DISPLAY DATE AND TIME AT WEATHER LOCATION
+// DISPLAYS DATE AND TIME AT WEATHER LOCATION
 
 function showLocalDateTime(timestamp) {
   const localDateTime = new Date(timestamp);
@@ -109,13 +105,82 @@ function displayWeather(response) {
 
   showLocalDateTime(localDateTimeFromAPI);
 
-  // display data from API
+  // display current weather data from API
 
   const temperature = Math.round(response.data.main.temp);
   const cityName = response.data.name;
 
   document.querySelector("#city").innerHTML = `${cityName}`;
   document.querySelector("#current-temperature").innerHTML = `${temperature}°`;
+
+  // display current weather icon
+
+  function setCurrentWeatherIconAndColours(weatherID) {
+    const weatherIcon = document.querySelector("#current-weather-icon");
+    const app = document.querySelector(".app");
+
+    if (weatherID >= 200 && weatherID < 300) {
+      // thunderstorms
+      weatherIcon.innerHTML = `<i class="fas fa-bolt"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #321575 0%, #8D0B93 50%, #FF057C 100%)";
+    } else if (weatherID >= 300 && weatherID < 500) {
+      // drizzle
+      weatherIcon.innerHTML = `<i class="fas fa-cloud-rain"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #8989ba 0%, #a7a6cb 100%)";
+    } else if (weatherID >= 500 && weatherID < 600) {
+      // rain
+      weatherIcon.innerHTML = `<i class="fas fa-cloud-showers-heavy"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #330867 0%, #30cfd0 100%)";
+    } else if (weatherID >= 600 && weatherID < 700) {
+      // snow
+      weatherIcon.innerHTML = `<i class="fas fa-snowflake"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #c8d7e0 0%, #d7e7f0 100%)";
+    } else if (weatherID >= 700 && weatherID < 762) {
+      // 'atmosphere'
+      weatherIcon.innerHTML = `<i class="fas fa-smog"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #09203f 0%, #537895 100%)";
+    } else if (weatherID === 771 || weatherID === 781) {
+      //windy af
+      weatherIcon.innerHTML = `<i class="fas fa-wind"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #9D9EA3 0%, #BDBBBE 100%)";
+    } else if (weatherID === 800) {
+      // clear
+      weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #fcab91 0%, #fee6c5 100%)";
+    } else if (weatherID >= 801 && weatherID <= 803) {
+      // light clouds
+      weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #bbcae2 0%, #dee9f6 100%)";
+    } else if (weatherID === 804) {
+      // cloudy
+      weatherIcon.innerHTML = `<i class="fas fa-cloud"></i>`;
+
+      app.style.backgroundImage =
+        "linear-gradient(to right top, #6a85b6 0%, #bac8e0 100%)";
+    }
+  }
+
+  setCurrentWeatherIconAndColours(response.data.weather[0].id);
+
+  // document.querySelector(
+  //   "#current-weather-icon"
+  // ).innerHTML = `<i class="fas fa-cloud-sun"></i>`;
 }
 
 const search = document.querySelector("form");

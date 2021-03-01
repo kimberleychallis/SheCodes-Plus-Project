@@ -92,7 +92,7 @@ input.form-control:focus {
   letter-spacing: 0.05rem;
 }
 
-.current .current-weather-icon i {
+#current-weather-icon {
   font-size: 4rem;
   color: #6f86d6;
 }
