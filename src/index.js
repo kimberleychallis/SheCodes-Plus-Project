@@ -118,64 +118,94 @@ function displayWeather(response) {
   function setCurrentWeatherIconAndColours(weatherID) {
     const weatherIcon = document.querySelector("#current-weather-icon");
     const app = document.querySelector(".app");
+    const cityName = document.querySelector("#city");
+    const currentTemperature = document.querySelector("#current-temperature");
 
     if (weatherID >= 200 && weatherID < 300) {
       // thunderstorms
       weatherIcon.innerHTML = `<i class="fas fa-bolt"></i>`;
+      weatherIcon.style.color = "#321575";
+      cityName.style.color = "#321575";
+      currentTemperature.style.color = "#321575";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #321575 0%, #8D0B93 50%, #FF057C 100%)";
     } else if (weatherID >= 300 && weatherID < 500) {
       // drizzle
       weatherIcon.innerHTML = `<i class="fas fa-cloud-rain"></i>`;
+      weatherIcon.style.color = "#8989ba";
+      cityName.style.color = "#8989ba";
+      currentTemperature.style.color = "#8989ba";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #8989ba 0%, #a7a6cb 100%)";
     } else if (weatherID >= 500 && weatherID < 600) {
       // rain
       weatherIcon.innerHTML = `<i class="fas fa-cloud-showers-heavy"></i>`;
+      weatherIcon.style.color = "#325A8F";
+      cityName.style.color = "#325A8F";
+      currentTemperature.style.color = "#325A8F";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #330867 0%, #30cfd0 100%)";
     } else if (weatherID >= 600 && weatherID < 700) {
       // snow
       weatherIcon.innerHTML = `<i class="fas fa-snowflake"></i>`;
+      weatherIcon.style.color = "#7ABBE0";
+      cityName.style.color = "#7ABBE0";
+      currentTemperature.style.color = "#7ABBE0";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #c8d7e0 0%, #d7e7f0 100%)";
     } else if (weatherID >= 700 && weatherID < 762) {
       // 'atmosphere'
       weatherIcon.innerHTML = `<i class="fas fa-smog"></i>`;
+      weatherIcon.style.color = "#25405D";
+      cityName.style.color = "#25405D";
+      currentTemperature.style.color = "#25405D";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #09203f 0%, #537895 100%)";
     } else if (weatherID === 771 || weatherID === 781) {
       //windy af
       weatherIcon.innerHTML = `<i class="fas fa-wind"></i>`;
+      weatherIcon.style.color = "#626266";
+      cityName.style.color = "#626266";
+      currentTemperature.style.color = "#626266";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #9D9EA3 0%, #BDBBBE 100%)";
     } else if (weatherID === 800) {
       // clear
       weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
+      weatherIcon.style.color = "#E36138";
+      cityName.style.color = "#E36138";
+      currentTemperature.style.color = "#E36138";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #fcab91 0%, #fee6c5 100%)";
     } else if (weatherID >= 801 && weatherID <= 803) {
       // light clouds
       weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
+      weatherIcon.style.color = "#7496CD";
+      cityName.style.color = "#7496CD";
+      currentTemperature.style.color = "#7496CD";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #bbcae2 0%, #dee9f6 100%)";
     } else if (weatherID === 804) {
       // cloudy
       weatherIcon.innerHTML = `<i class="fas fa-cloud"></i>`;
+      weatherIcon.style.color = "#486FB6";
+      cityName.style.color = "#486FB6";
+      currentTemperature.style.color = "#486FB6";
 
       app.style.backgroundImage =
         "linear-gradient(to right top, #6a85b6 0%, #bac8e0 100%)";
     }
   }
 
+  // setCurrentWeatherIconAndColours(804);
   setCurrentWeatherIconAndColours(response.data.weather[0].id);
 
   // document.querySelector(
