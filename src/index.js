@@ -1,44 +1,54 @@
 // DISPLAY USER'S CURRENT DATE AND TIME
 
-const now = new Date();
+// const now = new Date();
 
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-const day = days[now.getDay()];
+// DISPLAY DATE AND TIME AT WEATHER LOCATION
 
-const date = now.getDate();
+function showLocalDateTime(timestamp) {
+  const localDateTime = new Date(timestamp);
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-const month = months[now.getMonth()];
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const day = days[localDateTime.getDay()];
 
-const year = now.getFullYear();
+  const date = localDateTime.getDate();
 
-const hour = now.getHours();
-const minutes = now.getMinutes();
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = months[localDateTime.getMonth()];
 
-document.querySelector(
-  "#date-time"
-).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
+  const year = localDateTime.getFullYear();
+
+  const hour = localDateTime.getHours();
+
+  let minutes = localDateTime.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  document.querySelector(
+    "#date-time"
+  ).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
+}
 
 // OPEN WEATHER API
 
@@ -90,6 +100,14 @@ function displayWeather(response) {
   document.querySelector(
     "#switch"
   ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
+
+  // display date and time of location from API
+
+  const dateTime = response.data.dt;
+  const timezone = response.data.timezone;
+  const localDateTimeFromAPI = (dateTime + timezone) * 1000;
+
+  showLocalDateTime(localDateTimeFromAPI);
 
   // display data from API
 

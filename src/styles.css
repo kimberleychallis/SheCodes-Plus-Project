@@ -5,8 +5,8 @@ body {
 
 .app {
   margin: 1.75rem auto 1rem auto;
-  width: 40%;
-  min-width: 470px;
+  max-width: 500px;
+  min-width: 445px;
   padding: 3rem 2.25rem 1.75rem 2.25rem;
   border-radius: 1.25rem;
   background-image: linear-gradient(to right top, #6f86d6 0%, #48c6ef 100%);
@@ -118,7 +118,7 @@ input.form-control:focus {
 /* Future Weather */
 
 .future {
-  padding: 1rem 1.5rem 0 1.5rem;
+  padding: 1rem 1rem 0 1rem;
   color: white;
   font-weight: 300;
 }
