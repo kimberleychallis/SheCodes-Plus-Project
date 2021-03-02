@@ -197,7 +197,7 @@ function displayWeather(response) {
             <div class="col-1 min-max"><span class="max max-day${index}">${Math.round(
         response.data.daily[index].temp.max
       )}</span></div>
-            <div class="col-2 min-max"><span class="min min-day${index}">${Math.round(
+            <div class="col-1 min-max"><span class="min min-day${index}">${Math.round(
         response.data.daily[index].temp.min
       )}</span></div>
           </div>`;
