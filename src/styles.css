@@ -8,7 +8,7 @@ body {
   border: 4px solid whitesmoke;
   margin: 1.75rem auto 1rem auto;
   max-width: 500px;
-  min-width: 435px;
+  /* min-width: 435px; */
   padding: 3rem 2.25rem 1.75rem 2.25rem;
 }
 
