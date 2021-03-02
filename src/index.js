@@ -133,11 +133,11 @@ function displayWeather(response) {
     } else if (weatherID >= 700 && weatherID < 762) {
       // 'atmosphere'
       weatherIcon.innerHTML = `<i class="fas fa-smog"></i>`;
-      weatherIcon.style.color = "#25405D";
-      cityName.style.color = "#25405D";
-      currentTemperature.style.color = "#25405D";
+      weatherIcon.style.color = "#939395";
+      cityName.style.color = "#939395";
+      currentTemperature.style.color = "#939395";
       app.style.backgroundImage =
-        "linear-gradient(to right top, #09203f 0%, #537895 100%)";
+        "linear-gradient(to right top, #B0B1B4 0%, #C3C4C8 52%, #dcdddf 100%)";
     } else if (weatherID === 771 || weatherID === 781) {
       //windy af
       weatherIcon.innerHTML = `<i class="fas fa-wind"></i>`;
@@ -149,11 +149,11 @@ function displayWeather(response) {
     } else if (weatherID === 800) {
       // clear
       weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
-      weatherIcon.style.color = "#E36138";
-      cityName.style.color = "#E36138";
-      currentTemperature.style.color = "#E36138";
+      weatherIcon.style.color = "#6f86d6";
+      cityName.style.color = "#6f86d6";
+      currentTemperature.style.color = "#6f86d6";
       app.style.backgroundImage =
-        "linear-gradient(to right top, #fcab91 0%, #fee6c5 100%)";
+        "linear-gradient(to right top, #6f86d6 0%, #48c6ef 100%)";
     } else if (weatherID >= 801 && weatherID <= 803) {
       // light clouds
       weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
@@ -194,12 +194,12 @@ function displayWeather(response) {
               )}"></i>
             </div>
 
-            <div class="col-1 min-max"><span class="max">${Math.round(
-              response.data.daily[index].temp.max
-            )}</span></div>
-            <div class="col-2 min-max"><span class="min">${Math.round(
-              response.data.daily[index].temp.min
-            )}</span></div>
+            <div class="col-1 min-max"><span class="max max-day${index}">${Math.round(
+        response.data.daily[index].temp.max
+      )}</span></div>
+            <div class="col-2 min-max"><span class="min min-day${index}">${Math.round(
+        response.data.daily[index].temp.min
+      )}</span></div>
           </div>`;
     }
 
@@ -303,7 +303,7 @@ function convertTemp() {
     // toggles 'button'
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
 
-    // switches temperatures to celsius
+    // SWITCHES TEMPERATURES TO CELSIUS
 
     // current temperature
 
@@ -334,11 +334,67 @@ function convertTemp() {
     document.querySelector(
       "#feels-like"
     ).innerHTML = `${feelsLikeTempCelsius}°`;
+
+    // FORECAST TEMPERATURES
+
+    // maxiumum temperatures
+
+    const maxDay1FahrenheitString = document.querySelector(".max-day1");
+    const maxDay1Fahrenheit = parseInt(maxDay1FahrenheitString.innerHTML);
+    const maxDay1Celsius = Math.round(convertToCelsius(maxDay1Fahrenheit));
+    document.querySelector(".max-day1").innerHTML = `${maxDay1Celsius}`;
+
+    const maxDay2FahrenheitString = document.querySelector(".max-day2");
+    const maxDay2Fahrenheit = parseInt(maxDay2FahrenheitString.innerHTML);
+    const maxDay2Celsius = Math.round(convertToCelsius(maxDay2Fahrenheit));
+    document.querySelector(".max-day2").innerHTML = `${maxDay2Celsius}`;
+
+    const maxDay3FahrenheitString = document.querySelector(".max-day3");
+    const maxDay3Fahrenheit = parseInt(maxDay3FahrenheitString.innerHTML);
+    const maxDay3Celsius = Math.round(convertToCelsius(maxDay3Fahrenheit));
+    document.querySelector(".max-day3").innerHTML = `${maxDay3Celsius}`;
+
+    const maxDay4FahrenheitString = document.querySelector(".max-day4");
+    const maxDay4Fahrenheit = parseInt(maxDay4FahrenheitString.innerHTML);
+    const maxDay4Celsius = Math.round(convertToCelsius(maxDay4Fahrenheit));
+    document.querySelector(".max-day4").innerHTML = `${maxDay4Celsius}`;
+
+    const maxDay5FahrenheitString = document.querySelector(".max-day5");
+    const maxDay5Fahrenheit = parseInt(maxDay5FahrenheitString.innerHTML);
+    const maxDay5Celsius = Math.round(convertToCelsius(maxDay5Fahrenheit));
+    document.querySelector(".max-day5").innerHTML = `${maxDay5Celsius}`;
+
+    // minimum temperatures
+
+    const minDay1FahrenheitString = document.querySelector(".min-day1");
+    const minDay1Fahrenheit = parseInt(minDay1FahrenheitString.innerHTML);
+    const minDay1Celsius = Math.round(convertToCelsius(minDay1Fahrenheit));
+    document.querySelector(".min-day1").innerHTML = `${minDay1Celsius}`;
+
+    const minDay2FahrenheitString = document.querySelector(".min-day2");
+    const minDay2Fahrenheit = parseInt(minDay2FahrenheitString.innerHTML);
+    const minDay2Celsius = Math.round(convertToCelsius(minDay2Fahrenheit));
+    document.querySelector(".min-day2").innerHTML = `${minDay2Celsius}`;
+
+    const minDay3FahrenheitString = document.querySelector(".min-day3");
+    const minDay3Fahrenheit = parseInt(minDay3FahrenheitString.innerHTML);
+    const minDay3Celsius = Math.round(convertToCelsius(minDay1Fahrenheit));
+    document.querySelector(".min-day3").innerHTML = `${minDay3Celsius}`;
+
+    const minDay4FahrenheitString = document.querySelector(".min-day4");
+    const minDay4Fahrenheit = parseInt(minDay4FahrenheitString.innerHTML);
+    const minDay4Celsius = Math.round(convertToCelsius(minDay4Fahrenheit));
+    document.querySelector(".min-day4").innerHTML = `${minDay4Celsius}`;
+
+    const minDay5FahrenheitString = document.querySelector(".min-day5");
+    const minDay5Fahrenheit = parseInt(minDay5FahrenheitString.innerHTML);
+    const minDay5Celsius = Math.round(convertToCelsius(minDay5Fahrenheit));
+    document.querySelector(".min-day5").innerHTML = `${minDay5Celsius}`;
   } else {
     // toggles 'button'
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to celsius`;
 
-    // switches temperatures to fahrenheit
+    // SWITCHES TEMPERATURES TO FAHRENHEIT
 
     // current temperature
 
@@ -365,6 +421,63 @@ function convertTemp() {
     document.querySelector(
       "#feels-like"
     ).innerHTML = `${feelsLikeTempFahrenheit}°`;
+
+    // FORECAST TEMPERATURES
+    // DEAR GOD, THERE MUST BE A BETTER WAY TO DO THIS
+
+    // maxiumum temperatures
+
+    const maxDay1CelsiusString = document.querySelector(".max-day1");
+    const maxDay1Celsius = parseInt(maxDay1CelsiusString.innerHTML);
+    const maxDay1Fahrenheit = Math.round(convertToFahrenheit(maxDay1Celsius));
+    document.querySelector(".max-day1").innerHTML = `${maxDay1Fahrenheit}`;
+
+    const maxDay2CelsiusString = document.querySelector(".max-day2");
+    const maxDay2Celsius = parseInt(maxDay2CelsiusString.innerHTML);
+    const maxDay2Fahrenheit = Math.round(convertToFahrenheit(maxDay2Celsius));
+    document.querySelector(".max-day2").innerHTML = `${maxDay2Fahrenheit}`;
+
+    const maxDay3CelsiusString = document.querySelector(".max-day3");
+    const maxDay3Celsius = parseInt(maxDay3CelsiusString.innerHTML);
+    const maxDay3Fahrenheit = Math.round(convertToFahrenheit(maxDay1Celsius));
+    document.querySelector(".max-day3").innerHTML = `${maxDay3Fahrenheit}`;
+
+    const maxDay4CelsiusString = document.querySelector(".max-day4");
+    const maxDay4Celsius = parseInt(maxDay4CelsiusString.innerHTML);
+    const maxDay4Fahrenheit = Math.round(convertToFahrenheit(maxDay4Celsius));
+    document.querySelector(".max-day4").innerHTML = `${maxDay4Fahrenheit}`;
+
+    const maxDay5CelsiusString = document.querySelector(".max-day5");
+    const maxDay5Celsius = parseInt(maxDay5CelsiusString.innerHTML);
+    const maxDay5Fahrenheit = Math.round(convertToFahrenheit(maxDay5Celsius));
+    document.querySelector(".max-day5").innerHTML = `${maxDay5Fahrenheit}`;
+
+    // minimum temperatures
+
+    const minDay1CelsiusString = document.querySelector(".min-day1");
+    const minDay1Celsius = parseInt(minDay1CelsiusString.innerHTML);
+    const minDay1Fahrenheit = Math.round(convertToFahrenheit(minDay1Celsius));
+    document.querySelector(".min-day1").innerHTML = `${minDay1Fahrenheit}`;
+
+    const minDay2CelsiusString = document.querySelector(".min-day2");
+    const minDay2Celsius = parseInt(minDay2CelsiusString.innerHTML);
+    const minDay2Fahrenheit = Math.round(convertToFahrenheit(minDay2Celsius));
+    document.querySelector(".min-day2").innerHTML = `${minDay2Fahrenheit}`;
+
+    const minDay3CelsiusString = document.querySelector(".min-day3");
+    const minDay3Celsius = parseInt(minDay3CelsiusString.innerHTML);
+    const minDay3Fahrenheit = Math.round(convertToFahrenheit(minDay1Celsius));
+    document.querySelector(".min-day3").innerHTML = `${minDay3Fahrenheit}`;
+
+    const minDay4CelsiusString = document.querySelector(".min-day4");
+    const minDay4Celsius = parseInt(minDay4CelsiusString.innerHTML);
+    const minDay4Fahrenheit = Math.round(convertToFahrenheit(minDay4Celsius));
+    document.querySelector(".min-day4").innerHTML = `${minDay4Fahrenheit}`;
+
+    const minDay5CelsiusString = document.querySelector(".min-day5");
+    const minDay5Celsius = parseInt(minDay5CelsiusString.innerHTML);
+    const minDay5Fahrenheit = Math.round(convertToFahrenheit(minDay5Celsius));
+    document.querySelector(".min-day5").innerHTML = `${minDay5Fahrenheit}`;
   }
 }
 
