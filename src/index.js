@@ -1,57 +1,10 @@
-// DISPLAYS DATE AND TIME AT WEATHER LOCATION
-
-function showLocalDateTime(timestamp) {
-  const localDateTime = new Date(timestamp);
-
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const day = days[localDateTime.getDay()];
-
-  const date = localDateTime.getDate();
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const month = months[localDateTime.getMonth()];
-
-  const year = localDateTime.getFullYear();
-
-  const hour = localDateTime.getHours();
-
-  let minutes = localDateTime.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  document.querySelector(
-    "#date-time"
-  ).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
-}
-
 // OPEN WEATHER API
 
 //// Open Weather Map API Details
 
 const apiKey = "3e11ec91583e0c90e17fc5eef84e88aa";
 const apiURLCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?";
+const apiURLForecast = "https://api.openweathermap.org/data/2.5/onecall?";
 
 //// API call using user input
 
@@ -91,39 +44,53 @@ geolocateButton.addEventListener("click", geolocateUser);
 //// Display city name and current temperature (input or geolocation)
 
 function displayWeather(response) {
-  // set app back to celsius or else conversion calculations go a bit mental
+  // nested functions
 
-  document.querySelector(
-    "#switch"
-  ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
+  function showLocalDateTime(timestamp) {
+    const localDateTime = new Date(timestamp);
 
-  // display date and time of location from API
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const day = days[localDateTime.getDay()];
 
-  const dateTime = response.data.dt;
-  const timezone = response.data.timezone;
-  const localDateTimeFromAPI = (dateTime + timezone) * 1000;
+    const date = localDateTime.getDate();
 
-  showLocalDateTime(localDateTimeFromAPI);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = months[localDateTime.getMonth()];
 
-  // display current weather data from API
+    const year = localDateTime.getFullYear();
 
-  const temperature = Math.round(response.data.main.temp);
-  const cityName = response.data.name;
-  const weatherDescription = response.data.weather[0].description;
-  const feelsLike = Math.round(response.data.main.feels_like);
-  const humidity = response.data.main.humidity;
-  const wind = Math.round(response.data.wind.speed * 3.6);
+    const hour = localDateTime.getHours();
 
-  document.querySelector("#city").innerHTML = `${cityName}`;
-  document.querySelector("#current-temperature").innerHTML = `${temperature}°`;
-  document.querySelector(
-    "#weather-description"
-  ).innerHTML = `${weatherDescription}`;
-  document.querySelector("#feels-like").innerHTML = `${feelsLike}°`;
-  document.querySelector("#humidity").innerHTML = `${humidity}`;
-  document.querySelector("#wind").innerHTML = `${wind}km/hr`;
+    let minutes = localDateTime.getMinutes();
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
 
-  // display current weather icon and colours to reflect current weather
+    document.querySelector(
+      "#date-time"
+    ).innerHTML = `${day}, ${date} ${month} ${year} ${hour}:${minutes}`;
+  }
 
   function setCurrentWeatherIconAndColours(weatherID) {
     const weatherIcon = document.querySelector("#current-weather-icon");
@@ -206,16 +173,120 @@ function displayWeather(response) {
     }
   }
 
-  // setCurrentWeatherIconAndColours(200);
-  // setCurrentWeatherIconAndColours(300);
-  // setCurrentWeatherIconAndColours(500);
-  // setCurrentWeatherIconAndColours(600);
-  // setCurrentWeatherIconAndColours(700);
-  // setCurrentWeatherIconAndColours(771);
-  // setCurrentWeatherIconAndColours(800);
-  // setCurrentWeatherIconAndColours(801);
-  // setCurrentWeatherIconAndColours(804);
+  function fetchForecast(latitude, longitude) {
+    const apiSearchString = `${apiURLForecast}lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+
+    axios.get(apiSearchString).then(displayForecast);
+  }
+
+  function displayForecast(response) {
+    document.querySelector("#future").innerHTML = null;
+
+    for (let index = 1; index < 6; index++) {
+      document.querySelector("#future").innerHTML += `
+          <div class="row">
+            <div class="col-7">
+              <h3>${getNameOfDay(response.data.daily[index].dt * 1000)}</h3>
+            </div>
+            <div class="col-2 icon">
+              <i class="fas fa-${getForecastIcon(
+                response.data.daily[index].weather[0].id
+              )}"></i>
+            </div>
+
+            <div class="col-1 min-max"><span class="max">${Math.round(
+              response.data.daily[index].temp.max
+            )}</span></div>
+            <div class="col-2 min-max"><span class="min">${Math.round(
+              response.data.daily[index].temp.min
+            )}</span></div>
+          </div>`;
+    }
+
+    function getNameOfDay(timestamp) {
+      const date = new Date(timestamp);
+
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      const day = days[date.getDay()];
+      return day;
+    }
+
+    function getForecastIcon(weatherID) {
+      if (weatherID >= 200 && weatherID < 300) {
+        return `bolt`;
+      } else if (weatherID >= 300 && weatherID < 500) {
+        return `cloud-rain`;
+      } else if (weatherID >= 500 && weatherID < 600) {
+        return `cloud-showers-heavy`;
+      } else if (weatherID >= 600 && weatherID < 700) {
+        return `snowflake`;
+      } else if (weatherID === 771 || weatherID === 781) {
+        return `wind`;
+      } else if (weatherID >= 700 && weatherID < 800) {
+        return `smog`;
+      } else if (weatherID === 800) {
+        return `sun`;
+      } else if (weatherID >= 801 && weatherID < 804) {
+        return `cloud-sun`;
+      } else if (weatherID === 804) {
+        return `cloud`;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  // set app back to celsius or else conversion calculations go a bit mental
+
+  document.querySelector(
+    "#switch"
+  ).innerHTML = `<i class="fas fa-sync-alt"></i> switch to fahrenheit`;
+
+  // display date and time of location from API
+
+  const dateTime = response.data.dt;
+  const timezone = response.data.timezone;
+  const localDateTimeFromAPI = (dateTime + timezone) * 1000;
+
+  showLocalDateTime(localDateTimeFromAPI);
+
+  // display current weather data from API
+
+  const temperature = Math.round(response.data.main.temp);
+  const cityName = response.data.name;
+  const weatherDescription = response.data.weather[0].description;
+  const feelsLike = Math.round(response.data.main.feels_like);
+  const humidity = response.data.main.humidity;
+  const wind = Math.round(response.data.wind.speed * 3.6);
+
+  document.querySelector("#city").innerHTML = `${cityName}`;
+  document.querySelector("#current-temperature").innerHTML = `${temperature}°`;
+  document.querySelector(
+    "#weather-description"
+  ).innerHTML = `${weatherDescription}`;
+  document.querySelector("#feels-like").innerHTML = `${feelsLike}°`;
+  document.querySelector("#humidity").innerHTML = `${humidity}`;
+  document.querySelector("#wind").innerHTML = `${wind}km/hr`;
+
+  // display current weather icon and change colours to reflect current weather
+
   setCurrentWeatherIconAndColours(response.data.weather[0].id);
+
+  // obtain five day forecast using latitude and longitude from current weather API
+  // one-call API only works using coordinates
+
+  const latitude = response.data.coord.lat;
+  const longitude = response.data.coord.lon;
+  fetchForecast(latitude, longitude);
 }
 
 const search = document.querySelector("form");

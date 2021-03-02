@@ -95,7 +95,7 @@ input.form-control:focus {
 
 #current-weather-icon {
   color: white;
-  font-size: 260px;
+  font-size: 270px;
   position: absolute;
   opacity: 25%;
   top: -120px;
@@ -103,21 +103,11 @@ input.form-control:focus {
 }
 
 #current-temperature {
-  font-size: 3rem;
+  font-size: 5rem;
   text-align: right;
   line-height: 1;
   font-weight: 400;
   color: #3d4a77;
-}
-
-#current-min-max-temperature {
-  text-align: right;
-  color: darkgray;
-  font-size: 0.8rem;
-  padding-top: 3px;
-  margin-top: 0;
-  letter-spacing: 0.05rem;
-  font-weight: 300;
 }
 
 #current-weather-details {
@@ -136,23 +126,24 @@ input.form-control:focus {
 
 /* Future Weather */
 
-.future {
+#future,
+.future-weather {
   padding: 1rem 1rem 0 1rem;
   color: white;
   font-weight: 300;
 }
 
-.future .row {
+.future-weather .row {
   padding: 0.5rem 0;
   transition: 200ms;
   border-radius: 1.25rem;
 }
 
-.future .row:hover {
+.future-weather .row:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.future h3,
+#future h3,
 h4 {
   font-size: 1rem;
   margin-top: 0.5rem;
@@ -160,18 +151,18 @@ h4 {
   font-weight: 300;
 }
 
-.future .icon {
+#future .icon {
   text-align: right;
   font-size: 1.25rem;
   margin-top: 0.2rem;
 }
 
-.future .min-max {
+#future .min-max {
   font-size: 1rem;
   letter-spacing: 0.05rem;
 }
 
-.future .min-max span {
+#future .min-max span {
   margin-top: 0.4rem;
   display: block;
 }
