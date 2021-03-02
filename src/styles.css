@@ -4,13 +4,12 @@ body {
 }
 
 .app {
+  border-radius: 1.25rem;
+  border: 4px solid whitesmoke;
   margin: 1.75rem auto 1rem auto;
   max-width: 500px;
   min-width: 445px;
   padding: 3rem 2.25rem 1.75rem 2.25rem;
-  border-radius: 1.25rem;
-  background-image: linear-gradient(to right top, #6f86d6 0%, #48c6ef 100%);
-  border: 4px solid whitesmoke;
 }
 
 /* Search */
@@ -64,11 +63,11 @@ input.form-control:focus {
 /* Current Weather */
 
 .current {
-  padding: 2rem;
-  margin: 2rem 0 1rem 0;
-  border-radius: 1.25rem;
   background-color: white;
+  border-radius: 1.25rem;
+  margin: 2rem 0 1rem 0;
   overflow: hidden;
+  padding: 2rem;
 }
 
 .current .now {
@@ -76,67 +75,67 @@ input.form-control:focus {
 }
 
 #city {
+  color: #3d4a77;
   font-size: 2.5rem;
+  line-height: 3rem;
   margin-bottom: 0;
   padding: 0;
-  color: #3d4a77;
-  line-height: 3rem;
 }
 
 #date-time {
-  font-size: 0.5rem;
-  text-transform: uppercase;
   color: gray;
+  font-size: 0.5rem;
+  letter-spacing: 0.05rem;
+  margin-top: 0;
   padding-left: 3px;
   padding-top: 0;
-  margin-top: 0;
-  letter-spacing: 0.05rem;
+  text-transform: uppercase;
 }
 
 #current-weather-icon {
   color: white;
   font-size: 270px;
-  position: absolute;
-  opacity: 25%;
-  top: -120px;
   left: -175px;
+  opacity: 25%;
+  position: absolute;
+  top: -120px;
 }
 
 #current-temperature {
-  font-size: 5rem;
-  text-align: right;
-  line-height: 1;
-  font-weight: 400;
   color: #3d4a77;
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 1;
+  text-align: right;
 }
 
 #current-weather-details {
   /* Most of this is the same as the date and time so might be worth finding a way to merge them*/
-  font-size: 0.5rem;
-  text-transform: uppercase;
   color: gray;
+  font-size: 0.5rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.8;
+  list-style-type: none;
+  margin-bottom: 0;
+  margin-top: 0;
   padding-left: 3px;
   padding-top: 3px;
-  margin-top: 0;
-  margin-bottom: 0;
-  letter-spacing: 0.05rem;
-  list-style-type: none;
-  line-height: 1.8;
+  text-transform: uppercase;
 }
 
 /* Future Weather */
 
 #future,
 .future-weather {
-  padding: 1rem 1rem 0 1rem;
   color: white;
   font-weight: 300;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .future-weather .row {
+  border-radius: 1.25rem;
   padding: 0.5rem 0;
   transition: 200ms;
-  border-radius: 1.25rem;
 }
 
 .future-weather .row:hover {
@@ -146,15 +145,15 @@ input.form-control:focus {
 #future h3,
 h4 {
   font-size: 1rem;
-  margin-top: 0.5rem;
-  letter-spacing: 0.05rem;
   font-weight: 300;
+  letter-spacing: 0.05rem;
+  margin-top: 0.5rem;
 }
 
 #future .icon {
-  text-align: right;
   font-size: 1.25rem;
   margin-top: 0.2rem;
+  text-align: right;
 }
 
 #future .min-max {
@@ -163,28 +162,28 @@ h4 {
 }
 
 #future .min-max span {
-  margin-top: 0.4rem;
   display: block;
+  margin-top: 0.4rem;
 }
 
 .min {
-  text-align: right;
   color: rgba(255, 255, 255, 0.5);
+  text-align: right;
 }
 
 /* Switch between celsius and fahrenheit */
 
 #switch {
+  cursor: pointer;
   font-size: 0.75rem;
   text-align: center;
-  cursor: pointer;
 }
 
 /* Link to GitHub Repo */
 
 .source {
-  font-size: 0.75rem;
-  text-align: center;
-  margin-bottom: 2rem;
   color: rgba(0, 0, 0, 0.5);
+  font-size: 0.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
