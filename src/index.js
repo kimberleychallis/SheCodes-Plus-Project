@@ -51,7 +51,7 @@ function showLocalDateTime(timestamp) {
 //// Open Weather Map API Details
 
 const apiKey = "3e11ec91583e0c90e17fc5eef84e88aa";
-const apiURL = "https://api.openweathermap.org/data/2.5/weather?";
+const apiURLCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?";
 
 //// API call using user input
 
@@ -63,7 +63,7 @@ function handleSubmit(event) {
 
 function searchCity(city) {
   if (city == null) return;
-  const apiSearchString = `${apiURL}q=${city}&appid=${apiKey}&units=metric`;
+  const apiSearchString = `${apiURLCurrentWeather}q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiSearchString).then(displayWeather);
 }
@@ -80,7 +80,7 @@ function obtainWeather(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
   const coords = `lat=${lat}&lon=${lon}`;
-  const apiSearchString = `${apiURL}${coords}&appid=${apiKey}&units=metric`;
+  const apiSearchString = `${apiURLCurrentWeather}${coords}&appid=${apiKey}&units=metric`;
 
   axios.get(apiSearchString).then(displayWeather);
 }
@@ -109,11 +109,21 @@ function displayWeather(response) {
 
   const temperature = Math.round(response.data.main.temp);
   const cityName = response.data.name;
+  const weatherDescription = response.data.weather[0].description;
+  const feelsLike = Math.round(response.data.main.feels_like);
+  const humidity = response.data.main.humidity;
+  const wind = Math.round(response.data.wind.speed * 3.6);
 
   document.querySelector("#city").innerHTML = `${cityName}`;
   document.querySelector("#current-temperature").innerHTML = `${temperature}°`;
+  document.querySelector(
+    "#weather-description"
+  ).innerHTML = `${weatherDescription}`;
+  document.querySelector("#feels-like").innerHTML = `${feelsLike}°`;
+  document.querySelector("#humidity").innerHTML = `${humidity}`;
+  document.querySelector("#wind").innerHTML = `${wind}km/hr`;
 
-  // display current weather icon
+  // display current weather icon and colours to reflect current weather
 
   function setCurrentWeatherIconAndColours(weatherID) {
     const weatherIcon = document.querySelector("#current-weather-icon");
@@ -127,7 +137,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#321575";
       cityName.style.color = "#321575";
       currentTemperature.style.color = "#321575";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #321575 0%, #8D0B93 50%, #FF057C 100%)";
     } else if (weatherID >= 300 && weatherID < 500) {
@@ -136,7 +145,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#8989ba";
       cityName.style.color = "#8989ba";
       currentTemperature.style.color = "#8989ba";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #8989ba 0%, #a7a6cb 100%)";
     } else if (weatherID >= 500 && weatherID < 600) {
@@ -145,7 +153,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#325A8F";
       cityName.style.color = "#325A8F";
       currentTemperature.style.color = "#325A8F";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #330867 0%, #30cfd0 100%)";
     } else if (weatherID >= 600 && weatherID < 700) {
@@ -154,7 +161,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#7ABBE0";
       cityName.style.color = "#7ABBE0";
       currentTemperature.style.color = "#7ABBE0";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #c8d7e0 0%, #d7e7f0 100%)";
     } else if (weatherID >= 700 && weatherID < 762) {
@@ -163,7 +169,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#25405D";
       cityName.style.color = "#25405D";
       currentTemperature.style.color = "#25405D";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #09203f 0%, #537895 100%)";
     } else if (weatherID === 771 || weatherID === 781) {
@@ -172,7 +177,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#626266";
       cityName.style.color = "#626266";
       currentTemperature.style.color = "#626266";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #9D9EA3 0%, #BDBBBE 100%)";
     } else if (weatherID === 800) {
@@ -181,7 +185,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#E36138";
       cityName.style.color = "#E36138";
       currentTemperature.style.color = "#E36138";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #fcab91 0%, #fee6c5 100%)";
     } else if (weatherID >= 801 && weatherID <= 803) {
@@ -190,7 +193,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#7496CD";
       cityName.style.color = "#7496CD";
       currentTemperature.style.color = "#7496CD";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #bbcae2 0%, #dee9f6 100%)";
     } else if (weatherID === 804) {
@@ -199,7 +201,6 @@ function displayWeather(response) {
       weatherIcon.style.color = "#486FB6";
       cityName.style.color = "#486FB6";
       currentTemperature.style.color = "#486FB6";
-
       app.style.backgroundImage =
         "linear-gradient(to right top, #6a85b6 0%, #bac8e0 100%)";
     }
@@ -215,17 +216,12 @@ function displayWeather(response) {
   // setCurrentWeatherIconAndColours(801);
   // setCurrentWeatherIconAndColours(804);
   setCurrentWeatherIconAndColours(response.data.weather[0].id);
-
-  // document.querySelector(
-  //   "#current-weather-icon"
-  // ).innerHTML = `<i class="fas fa-cloud-sun"></i>`;
 }
 
 const search = document.querySelector("form");
 search.addEventListener("submit", handleSubmit);
 
 // SWITCH BETWEEN CELSIUS AND FAHRENHEIT
-// Will probably need to split these out into functions that do the conversion
 
 function convertTemp() {
   const switchButton = document.querySelector("#switch");
@@ -238,26 +234,66 @@ function convertTemp() {
 
     // switches temperatures to celsius
 
-    const tempFahrenheitString = document.querySelector("#current-temperature");
-    const tempFahrenheit = parseInt(tempFahrenheitString.innerHTML);
-    const tempCelsius = Math.round(convertToCelsius(tempFahrenheit));
+    // current temperature
+
+    const currentTempFahrenheitString = document.querySelector(
+      "#current-temperature"
+    );
+    const currentTempFahrenheit = parseInt(
+      currentTempFahrenheitString.innerHTML
+    );
+    const currentTempCelsius = Math.round(
+      convertToCelsius(currentTempFahrenheit)
+    );
 
     document.querySelector(
       "#current-temperature"
-    ).innerHTML = `${tempCelsius}°`;
+    ).innerHTML = `${currentTempCelsius}°`;
+
+    // feels like temperature
+
+    const feelsLikeTempFahrenheitString = document.querySelector("#feels-like");
+    const feelsLikeTempFahrenheit = parseInt(
+      feelsLikeTempFahrenheitString.innerHTML
+    );
+    const feelsLikeTempCelsius = Math.round(
+      convertToCelsius(feelsLikeTempFahrenheit)
+    );
+
+    document.querySelector(
+      "#feels-like"
+    ).innerHTML = `${feelsLikeTempCelsius}°`;
   } else {
     // toggles 'button'
     switchButton.innerHTML = `<i class="fas fa-sync-alt"></i> switch to celsius`;
 
     // switches temperatures to fahrenheit
 
-    const tempCelsiusString = document.querySelector("#current-temperature");
-    const tempCelsius = parseInt(tempCelsiusString.innerHTML);
-    const tempFahrenheit = Math.round(convertToFahrenheit(tempCelsius));
+    // current temperature
+
+    const currentTempCelsiusString = document.querySelector(
+      "#current-temperature"
+    );
+    const currentTempCelsius = parseInt(currentTempCelsiusString.innerHTML);
+    const currentTempFahrenheit = Math.round(
+      convertToFahrenheit(currentTempCelsius)
+    );
 
     document.querySelector(
       "#current-temperature"
-    ).innerHTML = `${tempFahrenheit}°`;
+    ).innerHTML = `${currentTempFahrenheit}°`;
+
+    // feels like temperature
+
+    const feelsLikeTempCelsiusString = document.querySelector("#feels-like");
+    const feelsLikeTempCelsius = parseInt(feelsLikeTempCelsiusString.innerHTML);
+    const feelsLikeTempFahrenheit = Math.round(
+      convertToFahrenheit(feelsLikeTempCelsius)
+    );
+
+    document.querySelector(
+      "#feels-like"
+    ).innerHTML = `${feelsLikeTempFahrenheit}°`;
   }
 }
 

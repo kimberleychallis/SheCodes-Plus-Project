@@ -54,7 +54,6 @@
               required
             />
             <div class="input-group-append">
-              
               <button class="btn" type="submit" id="search-city">
                 <i class="fas fa-search"></i>
               </button>
@@ -76,12 +75,18 @@
             </div>
 
             <div class="col-1">
-              <div id="current-weather-icon">
-                
-              </div>
+              <div id="current-weather-icon"></div>
             </div>
           </div>
           <div class="row temps">
+            <div class="col">
+              <ul id="current-weather-details">
+                <li><span id="weather-description">Heavy clouds</span></li>
+                <li>Feels like <span id="feels-like"></span></li>
+                <li>Humidity: <span id="humidity"></span></li>
+                <li>Wind: <span id="wind"></span></li>
+              </ul>
+            </div>
             <div class="col">
               <div id="current-temperature"></div>
               <div id="current-min-max-temperature">
@@ -171,15 +176,21 @@
             <div class="col">
               <h4 id="switch">
                 <i class="fas fa-sync-alt"></i> switch to fahrenheit
-              </h3>
+              </h4>
             </div>
           </div>
         </div>
       </div>
-    
-      <div class="source"><a href="https://github.com/kimberleychallis/SheCodes-Plus-Project" target="_blank">Open Source</a> code by 👩🏼‍💻 Kimberley Challis for <a href="https://shecodes.io"  target="_blank">SheCodes.io</a>
-      </div>
 
+      <div class="source">
+        <a
+          href="https://github.com/kimberleychallis/SheCodes-Plus-Project"
+          target="_blank"
+          >Open Source</a
+        >
+        code by 👩🏼‍💻 Kimberley Challis for
+        <a href="https://shecodes.io" target="_blank">SheCodes.io</a>
+      </div>
     </div>
 
     <script src="src/index.js"></script>
