@@ -184,9 +184,9 @@ function displayWeather(response) {
 
     for (let index = 1; index < 6; index++) {
       document.querySelector("#future").innerHTML += `
-          <div class="row">
-            <div class="col-7">
-              <h3>${getNameOfDay(response.data.daily[index].dt * 1000)}</h3>
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <h3> ${getNameOfDay(response.data.daily[index].dt * 1000)}</h3>
             </div>
             <div class="col-2 icon">
               <i class="fas fa-${getForecastIcon(
@@ -194,10 +194,10 @@ function displayWeather(response) {
               )}"></i>
             </div>
 
-            <div class="col-1 min-max"><span class="max max-day${index}">${Math.round(
+            <div class="col-1 d-flex justify-content-center min-max"><span class="max max-day${index}">${Math.round(
         response.data.daily[index].temp.max
       )}</span></div>
-            <div class="col-1 min-max"><span class="min min-day${index}">${Math.round(
+            <div class="col-1 d-flex justify-content-center min-max"><span class="min min-day${index}">${Math.round(
         response.data.daily[index].temp.min
       )}</span></div>
           </div>`;
